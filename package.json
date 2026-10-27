@@ -1,0 +1,62 @@
+{
+  "name": "saucify-pos",
+  "version": "1.0.0",
+  "private": true,
+  "main": "electron-main.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "desktop:dev": "concurrently -k \"cross-env PORT=3000 next dev\" \"wait-on http://127.0.0.1:3000 && electron .\"",
+    "desktop:start": "electron .",
+    "desktop:dist": "next build && electron-builder"
+  },
+  "build": {
+    "appId": "com.saucify.restaurant",
+    "productName": "Saucify Restaurant Software",
+    "directories": {
+      "output": "dist-desktop"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "public/favicon.ico"
+    },
+    "files": [
+      ".next/**/*",
+      "public/**/*",
+      "electron-main.js",
+      "electron-preload.js",
+      ".env",
+      "package.json",
+      "node_modules/**/*"
+    ]
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^13.4.4",
+    "lucide-react": "^0.475.0",
+    "next": "^15.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "recharts": "^3.10.1",
+    "tailwind-merge": "^3.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^20.17.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "concurrently": "^10.0.6",
+    "cross-env": "^10.1.0",
+    "dotenv": "^18.0.9",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.2.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "wait-on": "^9.5.1"
+  }
+}
