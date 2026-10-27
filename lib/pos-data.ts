@@ -1631,6 +1631,7 @@ let mockInventory: POSInventoryItem[] = [
 
 let mockUsers: POSUser[] = [
   { id: "10000000-0000-0000-0000-000000000001", name: "Admin Manager", email: "admin@saucify", role: "admin", active: true, status: "approved", created_at: new Date().toISOString() },
+  { id: "49ab2c63-78db-49e0-a3fd-919bd787fd5e", name: "Cashier", email: "cashier@saucify", role: "cashier", active: true, status: "approved", created_at: new Date().toISOString() },
 ];
 
 let mockIngredients: POSMenuItemIngredient[] = [

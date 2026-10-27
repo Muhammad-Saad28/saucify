@@ -15,6 +15,7 @@ export interface UserSession {
 // System Registered Credentials Mapping (Fresh Start: Only Master Administrator)
 export const SYSTEM_USERS: { email: string; password: string; role: "admin" | "waiter" | "kitchen" | "cashier" | "rider"; name: string; id: string }[] = [
   { id: "10000000-0000-0000-0000-000000000001", email: "admin@saucify", password: "admin123", role: "admin", name: "Admin Manager" },
+  { id: "49ab2c63-78db-49e0-a3fd-919bd787fd5e", email: "cashier@saucify", password: "cashier123", role: "cashier", name: "Cashier" },
 ];
 
 export function useAuth() {
@@ -117,7 +118,11 @@ export function useAuth() {
           throw new Error("Your registration request was rejected by an administrator.");
         }
 
-        const role = data.role as "admin" | "waiter" | "kitchen" | "cashier" | "rider";
+        let role = data.role as "admin" | "waiter" | "kitchen" | "cashier" | "rider";
+        // Allow cashier tab login if user email/name is cashier or if selectedRole is cashier
+        if (selectedRole === "cashier" && (cleanEmail.includes("cashier") || role === "admin")) {
+          role = "cashier";
+        }
         if (selectedRole && role !== selectedRole) {
           setLoading(false);
           throw new Error(`This account is registered as a ${role.toUpperCase()}. Please switch to the ${role.toUpperCase()} tab to sign in.`);
